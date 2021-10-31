@@ -63,7 +63,7 @@ func GetRandomWord() string {
 	return words[random.NextInt(0, len(words)-1)]
 }
 
-func StringContains(strArray []string, toFind string) bool {
+func StringArrayContains(strArray []string, toFind string) bool {
 	for _, a := range strArray {
 		if a == toFind {
 			return true
@@ -86,7 +86,7 @@ func DisplayBoard(missedLetters []string, correctLetters []string, secretWord st
 	lettersInSecretWord := strings.Split(secretWord, "")
 
 	for i := 0; i < len(lettersInSecretWord); i++ {
-		if StringContains(correctLetters, lettersInSecretWord[i]) {
+		if StringArrayContains(correctLetters, lettersInSecretWord[i]) {
 			displayWord = displayWord + lettersInSecretWord[i]
 		} else {
 			displayWord = displayWord + "_"
@@ -109,7 +109,7 @@ func GetGuess(currentGuesses []string) string {
 		if len(guess) != 1 {
 			fmt.Println("Not a valid entry.")
 			continue
-		} else if StringContains(currentGuesses, guess) {
+		} else if StringArrayContains(currentGuesses, guess) {
 			fmt.Println("You've already guessed that letter.")
 			continue
 		} else if strings.Contains(validGuesses, guess) == false {
@@ -141,7 +141,7 @@ func main() {
 		guess := GetGuess(append(gameStatus.MissedLetters, gameStatus.CorrectLetters...))
 
 		// Check if the player correctly guess a letter
-		if StringContains(strings.Split(gameStatus.SecretWord, ""), guess) {
+		if StringArrayContains(strings.Split(gameStatus.SecretWord, ""), guess) {
 			gameStatus.CorrectLetters = append(gameStatus.CorrectLetters, guess)
 
 			// Check if player has won
@@ -149,7 +149,7 @@ func main() {
 			secretLetters := strings.Split(gameStatus.SecretWord, "")
 			foundAllLetters := true
 			for i := 0; i < len(secretLetters); i++ {
-				if StringContains(gameStatus.CorrectLetters, secretLetters[i]) == false {
+				if StringArrayContains(gameStatus.CorrectLetters, secretLetters[i]) == false {
 					foundAllLetters = false
 					break
 				}
