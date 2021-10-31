@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Hangman/gojaygo"
+	. "Hangman/gojaygo"
 	"bufio"
 	"fmt"
 	"os"
@@ -59,18 +59,8 @@ func GetRandomWord() string {
 		"owl panda parrot pigeon python rabbit ram rat raven rhino salmon seal shark sheep skunk sloth snake spider "+
 		"stork swan tiger toad trout turkey turtle weasel whale wolf wombat zebra", " ")
 
-	random := gojaygo.NewRandomGenerator()
+	random := NewRandomGenerator()
 	return words[random.NextInt(0, len(words)-1)]
-}
-
-func StringArrayContains(strArray []string, toFind string) bool {
-	for _, a := range strArray {
-		if a == toFind {
-			return true
-		}
-	}
-
-	return false
 }
 
 func DisplayBoard(missedLetters []string, correctLetters []string, secretWord string) {
